@@ -37,4 +37,7 @@ might add more?
 - Baseline CNN model
 - wide vs deep
 - with / without time info
-- transfer learning(for fun?) - maybe ResNet
+- transfer learning(for fun?) - ResNet50 / MobileNetV2
+
+### Quantum CNN
+- Particle Classfication with QCNN

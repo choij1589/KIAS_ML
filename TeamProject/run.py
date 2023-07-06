@@ -11,7 +11,7 @@ from tensorflow.keras.callbacks import ReduceLROnPlateau, ModelCheckpoint
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import roc_curve, auc
 
-from models import make_baseline_model, make_resnet50
+from models import make_baseline_model, make_resnet50, make_MobileNetV2, make_ConvNeXtTiny
 # GPU settings
 from tensorflow.compat.v1.keras.backend import set_session
 config = tf.compat.v1.ConfigProto()
@@ -54,8 +54,12 @@ print(f"@@@@ x_train shape: {x_train.shape} - y_train shape: {y_train.shape}")
 print(f"@@@@ x_test shape: {x_test.shape} - y_test shape: {y_test.shape}")
 
 # baseline model
-model = make_baseline_model(input_shape, (32, 32, 256, 256))
-#model = make_resnet50(input_shape)
+if args.name == "ResNet50":
+    model = make_resnet50(input_shape)
+elif args.name == "MobileNetV2":
+    model = make_MobileNetV2(input_shape)
+else:
+    model = make_baseline_model(input_shape, (32, 32, 256, 256))
 model.compile(loss='binary_crossentropy', optimizer=Adam(learning_rate=args.init_lr), metrics=['accuracy'])
 model.summary()
 

@@ -27,3 +27,23 @@ def make_resnet50(input_shape):
     x = Dense(1, activation="sigmoid")(x)
     model = Model(inputs=base_model.input, outputs=x)
     return model
+
+def make_MobileNetV2(input_shape):
+    base_model = tf.keras.applications.MobileNetV2(
+        include_top=False, weights=None, input_shape=input_shape
+    )
+    x = Flatten()(base_model.output)
+    x = Dense(256, activation="relu")(x)
+    x = Dense(1, activation="sigmoid")(x)
+    model = Model(inputs=base_model.input, outputs=x)
+    return model
+
+def make_ConvNeXtTiny(input_shape):
+    base_model = tf.keras.applications.ConvNeXtTiny(
+        include_top=False, weights=None, input_shape=input_shape
+    )
+    x = Flatten()(base_model.output)
+    x = Dense(256, activation="relu")(x)
+    x = Dense(1, activation="sigmoid")(x)
+    model = Model(inputs=base_model.input, outputs=x)
+    return model
